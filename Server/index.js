@@ -3,6 +3,7 @@ var app = express()
 var cors = require('cors')
 var logger = require('morgan')
 var mongoose = require('mongoose')
+var routes = require('./src/routes')
 
 var corsOptions = {
     origin : 'http://localhost:3000',
@@ -20,6 +21,7 @@ mongoose.connect(CONNECT_URL, {
 app.use(cors(corsOptions))   // cors 설정
 app.use(express.json()) // request body 파싱
 app.use(logger('tiny')) // Logger 설정
+app.use("/api",routes)  // api 라우팅
 
 app.get('/hello', (req, res) => {   // URL 응답 테스트 ,위치 주의
     res.send('hello world!')
